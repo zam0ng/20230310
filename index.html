@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javaScript</title>
+</head>
+<body>
+    자바스크립트 해보자
+</body>
+<!-- body 태그 밑에 작성
+     script 태그는 javascript 구문을 작성할 수 있게 도와주는 태그 -->
+
+<script>
+    //한줄 주석
+    /*
+        줄내림 주석
+    */
+   // 자바스크립트 변수 : 데이터를 가르키는 주소, 주소를 알면 데이터를 가져올수 있다.
+   // 변수를 선언 -> 변수에 데이터를 정의 -> 그걸 메모리에 담는다.
+   // 메모리 : 프로그램이 실행되는 동안 필요한 데이터뫄 명령어를 저장하는 곳.
+   // 렘 : cpu가 데이터를 빠르게 접근하고 사용할 수 있는 공간
+   //      cpu가 처리할 데이터나 명령어를 잠시 저장하고 사용하는 용도로 사용된다.
+   //      전원이 꺼지면 저장된 데이터가 모두 날아간다.
+
+   // var와 let이 있다. 둘의 차이점은 var는 재선언이 가능하고 let은 재선언이 불가능하다 / var쓰지말고 let으로 작성.
+    var var1 = 1; //1이라는 값을 메모리에 저장하는데 var1이름으로 저장 , 1이라는 값에 접근할 수 있도록 var1이라는 변수명을 지정
+
+    let let1 = 1; 
+    let let2 ; // 값을 넣지않고 이름만 미리 선언 가능.
+    let2 = 10;
+
+    // 자바스크립트에서 변수를 선언할 때 let var 같은 키워드를 꼭 사용해줘야한다.
+
+    let3 =3; // 이렇게 선언하면 안된다. 전역변수로 선언이 되고 문제가 발생한다.
+
+    console.log(let2); // console.log("브라우저 개발자 모드 콘솔 창에 보여줄 값")
+
+    let let4 = "나는 글자";
+    console.log(let4);
+
+    //타입검사 : typeof
+    console.log(typeof let4);
+
+    //변수에 저장되는 데이터는 타입이 있는데 숫자는 number, 문자는 string
+
+    //참과 거짓 , boolean 형 타입
+    let let5 = true;
+    let let6 = false;
+
+    console.log(typeof let5, typeof let6);
+
+    //선언만 되고 값이 없을 때 undefined 형 타입, 값의 부재가 없다. 값이 확인되지 않을 때 발생, 
+    let let7 ;
+    console.log(let7);
+    
+    // undefined와 같이 값이 없음을 나타내는 타입, 개발자가 변수에 값이 없음을 의도적으로 나타낼 때 작성해놓는 값이다.
+    let let8 = null;
+    console.log(let8);
+
+    //데이터의 byte : 숫자 :8byte , 문자열 길이에 따라 다르지만 대략 :2byte, boolean :1byte, null :0byte, undefined :0byte
+
+    //블록체인 들어가서 바이트 패딩기법
+    // 데이터를 전송하거나 저장할 때 인정한 크기의 블록으로 나누어서 각 블록의 크기를 일정하게 맞추  사용가능
+    // 데이터를 전송할 때 보안성이나 속도를 향상 시킬 수 있다.
+
+    //암호화 sha-256 이라는 데이터 암호화 시켜주는 함수
+
+    // 간단히 let 선언문으로 type 1이라는 이름의 변수를 만들고 값 넣지말고 선언만 하고
+    // 그밑에 console.log()로 type1 변수의 값을 확인하고, 5라는 값을 넣고 다시 console.log로 확인
+    // 그다음에 console.log로 typeof로 타입을 확인하고 , 밑에 본인이름은 type1변수에 대입 후 console.log()확인
+
+    let type1 ;
+    console.log(type1);
+
+    type1 = 5;
+    console.log(type1);
+
+    console.log(typeof type1);
+
+    type1 = "이재영";
+
+    console.log(type1);
+
+    //object  객체타입.
+    let obj = {a:1,b:2,c:3};
+    // obj 객체의 a값을 대입하거나 가져오려면 
+    //.으로 객체의 값에 접근할 수 있다.
+    console.log("obj : a:",obj.a);
+    console.log("obj : b:",obj.b);
+    console.log("obj : c:",obj.c);
+    // 객체의 키값 a,b,c;
+    //객체의 키값 변경
+    obj.a = 10;
+    console.log(obj.a);
+    // 객체의 키값 추가
+    obj.d = 20;
+    console.log(obj.d);
+    
+
+    //배열 타입
+    //대괄호로 정의 , 여러형태의 값을 넣을 수 있다.
+    let arr =[1,2,3,"1","2","3"];
+    // 배열의 인덱스는 0
+    // 배열의 값의 순서는 (0 ~ 배열의 길이 -1)
+    // 배열의 인덱스 0~5
+    // 배열에 들어있는 값은 6개인데
+    // 0부터 시작한다 했으니까 위의 배열은 순서는 0~5 까지
+    console.log("arr 0 :",arr[0]);
+    console.log("arr 1 :",arr[1]);
+    console.log("arr 2 :",arr[2]);
+    console.log("arr 3 :",arr[3]);
+    console.log("arr 4 :",arr[4]);
+    console.log("arr 5 :",arr[5]);
+
+    //배열의 값 추가 
+    // push 하면 배열에 있는 리스트들 값의 맨뒤에 새로운 값이 추가된다.
+    arr.push("4");
+    console.log(arr[6]);
+
+    //object, array : 레퍼런스 타입
+
+    //변수의 이름을 작성하는 방법
+    // 케밥 표기법 let item-box;
+    // 카멜 표기법 let itemBox;
+    // 스네이크 표기법 let item_box;
+    // 헝가리안 표기법, 잘안씀 let strItemBox;
+    // 파스칼 표기법, 나중에 react 들어가서 컴포넌트에서 보게 될거임 let ItemBox;
+
+    //연산자 + - / * %
+    let a =2, b=3, c= a+b; 
+    console.log(c);
+
+    let text1 = "나는 ";
+    let text2 = "배고프다";
+    console.log(text1+text2);
+
+    
+    console.log(a-b);
+    console.log(a*b);
+    console.log(a/b);
+    console.log(a%b);
+
+    // ++, --, **
+    a++;
+    console.log(a);
+
+    a--;
+    console.log(a);
+    // ++, -- 같은 경우에는 값이 증가하지만, a+1, a-1은 a=a+1, a=a-1로 대입하지않으면 값이 증가하지않는다.
+
+    // let test1 = 1;
+    // console.log(test1 +1 );
+    // console.log(test1);
+
+    let test1 = 1;
+
+    test1 =  test1 +1;
+    
+    console.log(test1);
+
+
+    // a 변수에 값을 대입하는데 a의 3 제곱의 값을 대입한다.
+    a= a**3;
+    console.log(a);
+
+    //비교하는 연산자
+    // !, ==, ===, !=, !==, > ,<
+    let test2 = true;
+    let test3 = false;
+    console.log(!test3); // ! 붙이면 값을 반전시킨디ㅏ.
+
+    let test4 = 2;
+    let test5 = 2;
+    console.log(test4==test5); // == 붙이면 두 값이 같은지 본다.
+
+    console.log(test4===test5); // === 두값을 확실하게 비교, 위에 == 숫자 2와 문자 2와 true 반환하지만 ,=== 타입까지 비교하기 때문에 false를 반환한다.
+
+    console.log(test4 != test5); // 같은지 비교를 하고 같으면 false, 다르면 true 
+
+    console.log(test4 !== test5); // 위에꺼랑 같지만 타입까지 비교 , === 반대
+
+    let test6 =3;
+    let test7 =5;
+
+    // ()안에 true면 true, false면 false
+    console.log(test6 > test7);
+    console.log(test6 < test7);
+
+    
+    test6 =3; 
+    test7 =5; 
+
+    console.log(test6 >= test7);
+    console.log(test6 <= test7);
+
+    
+
+
+
+
+
+    
+
+
+
+
+
+
+    
+
+   
+   
+
+
+</script>
+</html>
