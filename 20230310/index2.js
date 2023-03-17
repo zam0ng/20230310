@@ -1,10 +1,10 @@
-// let c;
+let c;
 
-// for(c=0; c<=80; c++){
+for(c=0; c<=80; c++){
 
-//     console.log(parseInt((c/9)+1)+"*"+((c%9)+1)+"="+(parseInt((c/9)+1)*((c%9)+1)));
+    console.log(parseInt((c/9)+1)+"*"+((c%9)+1)+"="+(parseInt((c/9)+1)*((c%9)+1)));
     
-// }
+}
 
         
     

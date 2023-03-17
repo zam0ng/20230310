@@ -1,0 +1,53 @@
+.tables{
+
+    display: flex;
+    width: 500px;
+    border-top: 1px solid black;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    
+    box-sizing: border-box;
+    
+
+}
+
+.tables li{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    width: 100px;
+    height: 20px;
+    border-collapse: collapse;
+    box-sizing: border-box;
+
+    
+}
+.div_table{
+    margin-top: 30px;
+}
+
+div:first-child{
+    
+    width: max-content;
+}
+
+div{
+    width: max-content;
+    border-bottom: 1px solid black;
+}
+
+.input_name{
+    width: 60px;
+}
+.input_age{
+    width : 30px;
+}
+.input_mw{
+    width : 20px;
+}
+.input_content{
+    width : 50px;
+}
+.input_glass{
+    width :20px;
+}

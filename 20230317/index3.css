@@ -1,0 +1,12 @@
+.btn_div{
+    border: 1px solid black;
+    width: 100px;
+    height: 50px;
+    background-color: aqua;
+    border-radius: 12px;
+    box-shadow: 3px 3px 3px black; /*x축 y축 번짐도*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

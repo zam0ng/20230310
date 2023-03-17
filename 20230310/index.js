@@ -43,16 +43,8 @@ else{
 // 반복문을 가지고 구구단 만들기
 let aa ;
 let bb;
-// for(aa= 1; aa <=9; aa++){
-//     for (bb=1; bb<=9 ; bb++){   
-//         console.log(aa+'*'+bb +'='+(aa*bb));
-//     }
-// }
-
-let c ;
-
-for(c=9; c<=1; c--){
-        
-        console.log((c-(c-1))+ '*'+(c%(c-1))+'='(c%(c-1)) );
-
+for(aa= 1; aa <=9; aa++){
+    for (bb=1; bb<=9 ; bb++){   
+        console.log(aa+'*'+bb +'='+(aa*bb));
+    }
 }

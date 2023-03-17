@@ -1,24 +1,24 @@
-// 배열
+//배열
 
-// let a = [[11,22,33],[44,55,66],[77,88,99]];
+let a = [[11,22,33],[44,55,66],[77,88,99]];
 
-// console.log(a[0][2]);
-// console.log(a[1]);
-// console.log(a[2][0]);
+console.log(a[0][2]); // 33 출력
+console.log(a[1]); // 44,55,66 출력
+console.log(a[2][0]); // 77 출력
 
-// console.log(a[0]);
-// console.log(a.length);
+console.log(a[0]); // 11,22,33 출력
+console.log(a.length);
 
-// let b = [1, 2, 3, 4, 5, 6, 7];
-// b.push(8);
-// b.push(9);
+let b = [1, 2, 3, 4, 5, 6, 7];
+b.push(8);
+b.push(9);
 
-// console.log(b.length);
+console.log(b.length);
 
-// for (let i = 0; i < b.length; i++) {
-// console.log(b[i]);
+for (let i = 0; i < b.length; i++) {
+console.log(b[i]);
 
-// }
+}
 
 const obj = {
 a: "나는 객체야",

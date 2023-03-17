@@ -130,6 +130,14 @@ switch (1) {
         console.log("여기까지 끝");
         break;
 }
+switch (조건) {
+    case "조건값":
+         "수행할 구간"
+        break;
+
+    default:
+        break;
+}
 
 // while 반복문 무한히 돌아간다.
 // while ("값이 true 무한으로 돌아간다. false 값을 변경해주어야 반복문의 멈춘다.")
