@@ -62,7 +62,7 @@
     }
     // ondragend : 드래그 끝났을 때
     document.ondragend = function(e){
-        _target =null;
+        // _target =null;
         
         //e.target이 item 클래스가 있는 태그면
         if(e.target.classList.contains("item")){
@@ -73,7 +73,7 @@
     // ondragenter : 드래그 하고 태그의 위에 올려졌을때
     document.ondragenter = function(e){
         
-        if(e.target.classList.contains("box")&& _target !==null){
+        if(e.target.classList.contains("box")&& _target !==null){// 박스 고 타켓이 null 아닐때
             e.target.style.backgroundColor = "blue";
         }
     }
@@ -81,7 +81,7 @@
     document .ondragleave =function(e){
             // 배경을 투명으로 변경
         if(e.target.classList.contains("box")&& _target !==null){
-            e.target.style.backgroundColor = "transparent";
+            e.target.style.backgroundColor = "yellow";
         }
     }
     //ondragover : 드롭하고 대상이 드롭 가능한지 여부를 설정해준다.
@@ -96,8 +96,10 @@
     }
     // ondrop : 드래그를 하다가  마우스 버튼을 때면 드롭
     document.ondrop =function(e){
+               
+
         if(e.target.classList.contains("box") && _target !==null){
-            e.target.style.backgroundColor = "yellow";
+            e.target.style.backgroundColor = "transparent";
             // 원하는 위치에 태그에 내용으로 태그를 이동시켜줄 수 있다.
             e.target.append(_target); // 다시 append로 나타냈기떄문에 yellow가 뒤에 덮여진거임;
         }

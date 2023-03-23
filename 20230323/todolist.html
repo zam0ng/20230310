@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        
+        .xxx{
+            background-color: beige;
+        }
+        li{
+            width: 150px;
+            height: 50px;
+            border: 1px solid black;
+            display: flex;
+        }
+        
+        ._div1,
+        ._div2{
+            width: 200px;
+            height: 200px;
+        }
+        .del{
+            width :50px;
+            height:50px;
+            
+        }
+
+    </style>
+<body>
+
+    
+    <input type="text">
+    <label for="">할일</label>
+    <button id="btn">입력</button>
+    <button id="reset111">초기화</button>
+    
+    
+    <div id="_div">
+    </div>
+    
+    
+</body>
+<script>
+
+    let arr=[]; //빈 배열을  만들어 그리고 거기에 푸쉬를 해 그리고 그거 인덱스 값을 지정하면 돼
+    let count =1;
+    
+    
+    function reset(){
+     window.localStorage.clear();
+     _div.innerHTML = "";
+    }
+         window.localStorage.clear();
+
+    
+    function addList(){
+        let input = document.querySelectorAll("input");
+        let value = window.localStorage.getItem("todo");
+
+        if(window.localStorage.length == 0 ){
+            window.localStorage.setItem("todo",`{"today" : "${input[0].value}" }`,"");
+            
+            // console.log(window.localStorage.getItem("todo"));
+            let  a = window.localStorage.getItem("todo");
+            a = a.split("/");
+            console.log(a[0]);
+            console.log(a.length);
+            // arr.push(window.localStorage.getItem("todo")); //
+            // console.log(arr[0]);
+        }
+        else{
+            window.localStorage.setItem("todo",value + "/" + `{"today" : "${input[0].value}" }`);
+            
+            let  a = window.localStorage.getItem("todo");
+            a = a.split("/");
+            console.log(a[count]);
+            count +=1;
+            console.log(a.length);
+            console.log(a);
+            // for(let i=1; i<arr.length; i++){
+            // arr.push(window.localStorage.getItem("todo"));
+
+            } 
+        render();  // 여기까지 들어옴
+    }
+    
+    function render(){ //
+        
+        let  a = window.localStorage.getItem("todo");
+
+        a = a.split("/");
+
+        let _ul = document.createElement("ul");
+        let _li = document.createElement("li");
+        let _div1 = document.createElement("div");
+        let _button = document.createElement("button");
+
+        _button.classList.add("del");
+        
+
+        _ul.classList.add("xxx");
+        _button.innerHTML ="삭제";
+
+        _li.style.display = "flex";
+        _div.innerHTML = "";
+
+        // // 리스트안에 div 넣기
+        // _li.append(_div1);
+        // // ul안에 li 넣기
+        // _ul.append(_li);
+
+        // foreach로 순회해서 넣어주고 JSON.parse로 문자열 객체로 변경
+
+        a.forEach(function(e) {
+            
+            
+            let _li = document.createElement("li");
+            let _div1 = document.createElement("div");
+            let _button = document.createElement("button");
+
+            _div1.style.width ="100px";
+            
+            
+            
+        
+            _div1.innerHTML = JSON.parse(e).today;
+
+            _li.append(_div1,_button);
+            
+            _ul.append(_li);
+
+        })
+
+        
+        _div.append(_ul);
+    }
+
+    // let del1 = document.querySelector(".del");
+    // console.log(del1);
+    
+    //del1.addEventListener("click",delete1);
+
+    btn.addEventListener("click",addList);
+    reset111.addEventListener("click",reset);
+    
+
+</script>
+</html>
