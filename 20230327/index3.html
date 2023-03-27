@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .lotto-box,
+        .lotto-box2{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .lotto-box div,
+        .lotto-box2 div{
+            border: 5px solid ;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div>Lotto</div>
+    <h1>로또 박스</h1>
+    <div class ="lotto-box">
+    </div> 
+
+    <button class ="lotto-btn">로또 추첨</button>
+        
+    <div class ="lotto-box2">
+    </div>
+        
+    
+</body>
+<script>
+    let lottoBtn = document.querySelector(".lotto-btn");
+    let lottoNum =[];
+    let lottoResult = [];
+
+    function init(){
+
+        for (let i = 1; i <= 45; i++) {
+            lottoNum.push(i);
+
+            let _div = document.createElement("div");
+
+            _div.className = "item"+ i ;
+            _div.innerHTML = i ;
+            document.querySelector(".lotto-box").append(_div);
+        }
+
+    }
+
+    init();
+
+    lottoBtn.addEventListener("click",function(){
+        
+        //중복안되게 6개 뽑아야함.
+        // 랜덤값 1~45
+        while(lottoResult.length < 6 )
+        {
+            let num = Math.floor(Math.random() * 45) + 1;
+
+            //배열안에 값이 없으면 -1
+            
+            if(lottoResult.indexOf(num)=== -1)
+            {
+                //중복이 되지 않는 값이니깐 배열에 추가
+                lottoResult.push(num);
+                let lottoItem = document.querySelector(".item" + num);
+                
+                document.querySelector(".lotto-box2").append(lottoItem);
+
+            }
+        }
+        //구조분해할당 배열은 순서대로
+        //변수의 명이 어떻든 상관없이 순서대로 할당 받는다.
+
+        let [text1,text2,text3,text4,text5,text6] = lottoResult ;
+        console.log(text1,text2,text3,text4,text5,text6, "당첨번호");
+
+    });
+
+
+
+</script>
+</html>
