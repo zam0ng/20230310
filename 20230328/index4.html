@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위바위보</title>
+    <style>
+
+        .player-select,
+        .com-select{
+            width: 180px;
+            height: 154px;
+            background-image: url('./customLogo.gif');
+            background-repeat: no-repeat;
+            border :1px solid;
+            background-position-x: 25px;
+        }
+
+        .rock{
+            background-position-x: 25px;
+        }
+        .paper{
+            background-position-x: -270px;
+
+        }
+        .scissors{
+            background-position-x: -123px;        
+        }
+        .game-wrap{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- 버튼 가위 바위보 -->
+        <button id="easy" name="0">쉬움</button>
+        <button id="normal" name="1">보통</button>
+        <button id="hard" name="2">어려움</button>
+    <div class="game-wrap">
+        
+        <!-- player 선택한 이미지 -->
+        <div class = "player-select"></div>
+        <div class = "com-select"></div>
+    </div>
+    <h5>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspplayer&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspcomputer</h5>
+    <span class="money"></span>
+    <span class="batting"></span>
+    <h1 class ="result">결과</h1>
+    <p class ="subResult">내용</p>
+    <button class="player-btn">가위</button>
+    <button class="player-btn">보</button>
+    <button class="player-btn">바위</button>
+    
+
+
+    
+</body>
+<script>
+    // 클래스의 이름으로 사용하고 결과에서 사용할
+    // 가위바위보를 담은 문자열 배열을 만들자.
+
+    let gameArr=["scissors","paper","rock"];
+    let playBtns = document.querySelectorAll(".player-btn");
+
+    let playerSelect = document.querySelector(".player-select")
+
+    let playerAtk;
+    let comAtk;
+    let a =true;
+let b;
+    let levelArr =[];
+
+    level1();
+
+    function level(_name,_myMoney,_comMoney){
+        this.name=_name;
+        this.myMoney = _myMoney;
+        this.comMoney = _comMoney;
+    }
+
+    function level1(){
+        levelArr[0] = new level("easy",100000,10000);
+        levelArr[1] = new level("normal",50000,50000);
+        levelArr[2] = new level("hard",5000,100000);
+    
+    }
+    let my= document.querySelector(".money");
+
+    
+
+    easy.onclick=function(e){
+        b=parseInt(e.target.name);
+        
+        console.log(levelArr[0]);
+        
+        my.innerHTML=`플레이어 머니:${levelArr[0].myMoney} 컴퓨터 머니:${levelArr[0].comMoney}`;
+
+        
+
+    }
+    normal.onclick=function(e){
+        b=parseInt(e.target.name);
+        console.log(levelArr[1]);
+        let my= document.querySelector(".money");
+        my.innerHTML=`플레이어 머니:${levelArr[1].myMoney} 컴퓨터 머니:${levelArr[0].comMoney}`;
+
+        
+
+    }
+    hard.onclick=function(e){
+        b=parseInt(e.target.name);
+        console.log(levelArr[2]);
+        let my= document.querySelector(".money");
+        my.innerHTML=`플레이어 머니:${levelArr[2].myMoney} 컴퓨터 머니:${levelArr[0].comMoney}`;
+        
+    }
+
+    //컴퓨터의 결과를 보여줄 태그
+
+    function init(){
+        gameArr.forEach(function(i,index){
+
+            playBtns[index].onclick= function(){
+                let num = Math.floor(Math.random()*1000)+2000;
+                let batting = document.querySelector(".batting");
+                    batting.innerHTML = "배팅금액 :" +num;
+
+                playerSelect.className = "player-select "+i;
+
+                my.innerHTML=`플레이어 머니:${levelArr[b].myMoney} 컴퓨터 머니:${levelArr[b].comMoney}`;
+                console.log(levelArr[b].myMoney);
+
+                if(levelArr[b].myMoney<0 || levelArr[b].comMoney<0){
+                    
+                    alert("한쪽이 돈을 모두 소진했습니다.");
+
+                    levelArr[0] = new level("easy",100000,10000);
+                    levelArr[1] = new level("normal",50000,50000);
+                    levelArr[2] = new level("hard",10000,100000);
+
+                    return;
+                    
+                }
+                //구조분해할당으로 받고
+                let = {value ,text,pa,ca} = gameStart(i);
+                document.querySelector(".result").innerHTML = value;
+                document.querySelector(".subResult").innerHTML = text;
+
+                if(value=="플레이어"){
+                    
+                    mjb(pa,ca,num);
+
+                }
+                else if(value=="컴퓨터"){
+                    mjb(pa,ca,num);
+                }
+                else if(value=="무승부"){
+                    init();
+                } }  }) }
+    init();
+
+    function gameStart(player){
+        
+        //랜덤값으로 gameArr배열안에 가위,바위,보를 가져온다.
+        let comSelect =gameArr[Math.floor(Math.random()* gameArr.length)];
+        
+        document.querySelector('.com-select').className = 'com-select ' + comSelect;
+        // 무승부
+        if(player == comSelect){
+
+            return {value: "무승부", text : "다시"};
+
+        }
+        else if(player == "rock" && comSelect == "scissors" ||
+                player == "scissors" && comSelect == "paper" ||
+                player == "paper" && comSelect == "rock")
+        {
+            return {value: "플레이어", text : "선공",pa:1,ca:0}
+            
+        } else{
+            
+            return {value: "컴퓨터", text : "선공",pa:0,ca:1}
+        }
+        // 함수 실행하면 반환값이 객체다
+    }
+    
+    function mjb(c,d,num1){
+        console.log(num1);
+        gameArr.forEach(function(i,index){
+
+            playBtns[index].onclick = function(){
+
+                playerSelect.className = "player-select "+i;
+                
+                let comSelect =gameArr[Math.floor(Math.random()* gameArr.length)];
+                
+                document.querySelector('.com-select').className = 'com-select ' + comSelect;
+
+                let = {value2 , text2 ,num2} = vs(i,comSelect,c,d,num1);
+                
+                document.querySelector(".result").innerHTML = value2;
+                document.querySelector(".subResult").innerHTML = text2;         
+
+                        if(text2=="승"){
+                            console.log("한게임 끝");
+                            init(); 
+                        }
+        
+                        else if(value2=="플레이어" && text2 =="선공"){
+                            console.log("플레이어 선");
+                            c=1,d=0;
+                            mjb(c,d,num2);
+                        }
+                        else if(value2=="컴퓨터" && text2 =="선공"){
+                            console.log("컴퓨터 선");
+                            c=0,d=1;
+                            mjb(c,d,num2);
+                        }
+            }
+        })
+    }  
+
+    function vs(i,comSelect,c,d,num1){
+
+        // console.log(i);
+        //         console.log(comSelect);
+        //         console.log(c);
+        //         console.log(d);
+        let cc = Math.floor(Math.random()*2);
+
+        if(i==comSelect)
+                {   
+                    if(c==1 && d==0){
+                        console.log(num1);
+                        console.log(levelArr[0].myMoney);
+                        if(cc==0){
+                        levelArr[b].myMoney = levelArr[b].myMoney + (num1*2);
+                        levelArr[b].comMoney = levelArr[b].comMoney - (num1*2);
+
+                        return {value2: "플레이어", text2 : "승"};
+                        }
+                        else{
+                            levelArr[b].myMoney = levelArr[b].myMoney + (num1*3);
+                            levelArr[b].comMoney = levelArr[b].comMoney - (num1*3);
+
+                        return {value2: "플레이어", text2 : "승"};
+
+                        }
+                    }
+                    
+
+                    else if(c==0 && d==1){
+                    console.log(num1);
+                    console.log(levelArr[0].myMoney);
+
+                    if(cc==0){
+                        levelArr[b].comMoney = levelArr[b].comMoney + (num1*2);
+                        levelArr[b].myMoney = levelArr[b].myMoney - (num1*2);
+
+                        return {value2: "컴퓨터", text2 : "승"};
+                        }
+                        else{
+                            levelArr[b].comMoney = levelArr[b].comMoney + (num1*3);
+                            levelArr[b].myMoney = levelArr[b].myMoney - (num1*3);
+
+                        return {value2: "컴퓨터", text2 : "승"};
+
+                        }
+                    }
+                }
+        else if(i == "rock" && comSelect == "scissors" ||
+                i == "scissors" && comSelect == "paper" ||
+                i == "paper" && comSelect == "rock")
+                
+                {
+                    return {value2: "플레이어", text2 : "선공", num2 : num1};
+
+                }
+        else{
+                    return {value2: "컴퓨터", text2 : "선공", num2 : num1};
+        }
+
+    }
+</script>
+</html>
