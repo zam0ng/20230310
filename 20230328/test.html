@@ -44,7 +44,7 @@
       <button id="choicebtn2">어려움</button>
       <button id="choicebtn3">매우어려움</button>
     </div>
-    <p class="info">플레이어 보유금</p>
+    <p class="info"></p>
   <div class="game-wrap">
     <!-- 플레이어 선택한 이미지 -->
     <div class="player-select">나</div>
@@ -70,83 +70,105 @@
   let comWin;
 
   function playerMon(num) {
-    if (num = 1) {
+    if (num == 1) {
       // 난이도 쉬움
       this.mon = 100000;
-    }else if (num = 2) {
+      this.mo1 = 1000;
+    }else if (num == 2) {
       // 난이도 어려움
-      this.mon =50000
-    } else if(num = 3) {
+      this.mon =50000;
+      this.mo1 = 50000;
+    } else if(num == 3) {
       // 난이도 매우어려움
-      this.mon =10000
+      this.mon =10000;
+      this.mo1 = 100000;
     }
   }
+  
+  let ran ;
+  console.log(ran);
 
-  function player(playerInfo){
-    let outputPlayer = document.querySelector(".info")
-    outputPlayer.innerHTML = `플레이어 보유금 ${playerInfo.mon}`
-  }
+
 
   // 쉬움 버튼 눌렀을때
   choicebtn1.onclick = function(){
     playerInfo = new playerMon(1)
-    // plsayeInfo.document.querySelector('.info')
-    // playerInfo.innerHTML = playerInfo.mon
-    console.log(playerInfo.mon)
-    player(playerInfo);
+
+    let outputPlayer = document.querySelector(".info")
+    console.log(ran);
+    outputPlayer.innerHTML = `플레이어 보유금 ${playerInfo.mon} 컴퓨터 보유금 ${playerInfo.mo1} 배팅금액 ${ran}` 
+  }
+
+  choicebtn2.onclick = function(){
+    playerInfo = new playerMon(2)
+
+    let outputPlayer = document.querySelector(".info")
+    outputPlayer.innerHTML = `플레이어 보유금 ${playerInfo.mon} 컴퓨터 보유금 ${playerInfo.mo1} 배팅금액 ${ran} ` 
+  }
+
+  choicebtn3.onclick = function(){
+    playerInfo = new playerMon(3)
+
+    let outputPlayer = document.querySelector(".info")
+    outputPlayer.innerHTML = `플레이어 보유금 ${playerInfo.mon} 컴퓨터 보유금 ${playerInfo.mo1} 배팅금액 ${ran} ` 
   }
   
 
   function init() {
+    ran =Math.floor(Math.random()*1000)+2000;
     gameArr.forEach(function (item,index) {
-      // item : "scissors","paper","rock"
-      // index = 0,1,2 이 순서대로
-      playerBtns[index].addEventListener('click',function () {
-        // player 화면 선택한 가위,바위,보 이미지를 보여주는 태그
-        // 클래스 추가하되 기존 클래스 를 유지 하고 뒤에 item aks cnrk
+ 
+        playerBtns[index].onclick=function () {
+
         playerSelect.className = "player-select "+ item;
-        // 구조 분해 할당으로 받고
-        let{value,text,playerWin,comWin} = gameStart(item);
-        // 결과
-        document.querySelector('.result').innerHTML = value;
-        // 내용
-        document.querySelector('.subResult').innerHTML = text;
-        if (text=="무승부") {
+        
+
+        let outputPlayer = document.querySelector(".info")
+        outputPlayer.innerHTML = `플레이어 보유금 ${playerInfo.mon} 컴퓨터 보유금 ${playerInfo.mo1} 배팅금액 ${ran}` 
+
+        if(playerInfo.mon <0 || playerInfo.mo1<0){
+          playerInfo.mon ="";
+          playerInfo.mo1="";
+          alert("한쪽이 금액을 모두 소진하여 게임이 끝났습니다.");
+          outputPlayer.innerHTML = "난이도 재선택하세요"
           init();
         }
+    
+        let = {value,text,p,c} = gameStart(item);
+ 
+        document.querySelector('.result').innerHTML = value;
+     
+        document.querySelector('.subResult').innerHTML = text;
 
-        else if (playerWin == -1  && comWin ==0){
+        if (text=="무승부") {
+          console.log("무승부예용")
+          init();
+          return;
+        }
+        else if (p == 1  && c ==0){
+          console.log("플레이어 선공이예용")
           let p=1;
           let c=0
-          init2(p,c);
-        }else if (playerWin == 0  && comWin ==-1){
+          init2(p,c,ran);
+          return;
+        }else if (p == 0  && c == 1){
+
+          console.log("컴퓨터 선공이예용")
           let p=0;
           let c=1;
-          init2(p,c);
+          init2(p,c,ran);
+          return;
         }
-       
-        
-
-        
-      })
+      }
     })
   }
   init();
-        function gameStart(player) {
-        // if(playerWin !== -1 && comWin !==0){
-        //   console.log("플레이어가 선공 묵찌빠로 넘어가")
-        //   init2();
-        // }else if(comWin !== -1 && playerWin !==0){
-        //   console.log("컴퓨터가 선공 묵찌빠로 넘어가")
-        //   init2();
-        // }
-
-    // 컴퓨터의 결과를 보여줄 태그
-    // 랜덤값으로 gameArr 배열안에 가위,바위,보 를 가져오자
+    function gameStart(player) {
+      console.log(ran);
     let comSelect = gameArr[Math.floor(Math.random() * gameArr.length)];
     document.querySelector('.com-select').className = "com-select " + comSelect
-    // 무승부 거르고 시작
-    if (player == comSelect) {
+
+          if (player == comSelect) {
       return {value : "가위바위보", text : "무승부"}
     }else if
     (
@@ -157,24 +179,24 @@
     {
       // 플레이어가 이겼을때 선공권 가지고 가기 -> 선공권을 어떻게 주지
       //1주자
-      return{value : "가위바위보", text : "당신은 선공권을 얻었습니다",playerWin : -1, comWin:0}
+      return{value : "가위바위보", text : "당신은 선공권을 얻었습니다",p : 1, c:0}
 
     }else{
       // 플레이어가 패배했을때 컴퓨터한테 선공권 주기
-      return {value : "가위바위보", text : "컴퓨터가 선공권을 얻었습니다",playerWin : 0, comWin:-1}
+      return {value : "가위바위보", text : "컴퓨터가 선공권을 얻었습니다",p : 0, c:1}
     }
     // 함수 실행하면 반환값이 객체다
         }
 
   // 묵찌빠 내가 선택하기
-  function init2(p,c){
+  function init2(p,c,ran){
 
+    console.log(ran);
     gameArr.forEach(function(item,index) {
       playerBtns[index].onclick = function () {
         playerSelect.className = "player-select "+ item;
 
-
-        let = {value2,text2} = gameStart2(item,p,c);
+        let = {value2,text2} = gameStart2(item,p,c,ran);
         document.querySelector('.result').innerHTML = value2;
         document.querySelector('.subResult').innerHTML = text2;
 
@@ -182,35 +204,62 @@
           p = 1;
           c = 0;
           console.log("묵찌빠 플레이어 선공");
-          init2(p,c)
+          init2(p,c,ran)
+          return;
+
         }else if(value2=="묵찌빠-컴퓨터" && text2 =="선공"){
           p =0;
           c =1;
-          init2(p,c);
+          console.log("묵찌빠 컴퓨터 선공");
+          init2(p,c,ran);
+          return;
         }
         
         
         else if(text2 == "승리"){
-          
-          init()
+          console.log("한판 끝");
+          init();
         }
       }
   })
 }
 // 묵찌빠 시작
-function gameStart2(player,playerWin,comWin){
+function gameStart2(player,p,c){
+
+  console.log(ran)
   let comSelect = gameArr[Math.floor(Math.random() * gameArr.length)];
   document.querySelector('.com-select').className = "com-select " + comSelect;
 
+  let aa =Math.floor(Math.random()*1);
   //묵찌빠에서 같은거=> 이 if 내부에서 결정해도 될듯?
   if(player == comSelect){
-      if(playerWin== 1 &&comWin== 0)
+      if(p== 1 &&c== 0)
         {
+          if(aa==0){
+          playerInfo.mon= playerInfo.mon + (ran*2); 
+          playerInfo.mo1= playerInfo.mo1 - (ran*2);
         return{value2:"묵찌빠-플레이어", text2:"승리"}
+      }
+          else if(aa==1){
+            playerInfo.mon= playerInfo.mon + (ran*3); 
+          playerInfo.mo1= playerInfo.mo1 - (ran*3);
+        return{value2:"묵찌빠-플레이어", text2:"승리"}
+          }
+
         }
-      else if(comWin== 1 &&playerWin== 0)
+      else if(c== 1 &&p== 0)
         {
+          if(aa==0){
+          playerInfo.mon= playerInfo.mon - (ran*2); 
+          playerInfo.mo1= playerInfo.mo1 + (ran*2);
         return{value2:"묵찌빠-컴퓨터", text2:"승리"}
+          }
+
+          else if(aa==1){
+            playerInfo.mon= playerInfo.mon - (ran*3); 
+          playerInfo.mo1= playerInfo.mo1 + (ran*3);
+            
+          }
         }
     }
     // 묵찌빠 내가 이겼을때 => 플레이어 선공권
