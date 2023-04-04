@@ -19,14 +19,14 @@ class student{
     }
 
     getInfo(){
-        return "나이는 : " + this.age + "살임 핸드폰 번호는 " + this.phone + " 사는곳은 " + this.city;
+        return  "나이는 : " + this.age + "살임 핸드폰 번호는 " + this.phone + " 사는곳은 " + this.city;
 
     }
 }
 
 let st = new student(30,10,"서울");
-console.log(st);
-console.log(st.age);
+// console.log(st);
+// console.log(st.age);
 console.log(st.getInfo());  
 
 class Character{
