@@ -12,14 +12,15 @@ socket.on("connect",()=>{
     //연결되면 connet 이벤트를 실행.
     console.log("연결이 잘 되었어요");
 
-    socket.write("데이터 전송");
+    socket.write("데이터 전송22");
 
 })
 
 socket.on("data",(data)=>{
     //TCP 소켓에서 데이터를 받으면 콜백 함수 실행
 
-    console.log("받은 데이터 : ",data);
+    // console.log("받은 데이터 : ",(data.toString("utf-8")));
+    console.log("받은 데이터 : ",(data));
     socket.end();
     //end 메서드
     //TCP 연결을 종료

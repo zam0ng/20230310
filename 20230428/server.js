@@ -27,6 +27,7 @@ const PORT = 8080;
 //HTTP 버전이다.
 //1997년도에 도입이 되었고 지금까지도 많이 사용중이다.
 //body의 내용
+
 //Buffer.from 메서드를 사용해서 문자열을 바이트 데이터로 변환 해준다.
 //변환하는 이유는 HTTP 응답은 바이트 데이터로 전송되기 때문
 //body 문자열을 그대로 작성해버리면 인코딩에 문제가 생길수가 있다.
@@ -65,11 +66,11 @@ const server  = net.createServer((client)=>{
     // 클라이언트가 접속시 실행
     // 인코딩 설정
     // setEncoding 메서드로 인코딩 방식을 설정할 수 있다.
-    client.setEncoding('utf8');
+    // client.setEncoding('utf8');
 
     //클라이언트가 데이터를 보내서 데이터를 받으면 실행되는 콜백 함수
     client.on("data",(data)=>{
-        console.log(data) // 데이터의 타입 buffer
+        console.log("client가 보낸"+data) // 데이터의 타입 buffer
 
         //write 메서드로 클라이언트에 응답을 보냄
         client.write(response);
