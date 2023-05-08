@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>리스트 페이지</h2>
+    <a href="/insert">추가페이지로 이동</a>
+    <table>
+
+        <tr>
+            <th>삭제</th>
+            <th>수정</th>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>시리즈</th>
+        </tr>
+
+        <% if(data){ %>
+
+            <% data.forEach((el,index)=>{ %>
+                <tr>
+                    <td> <a href="/delete/<%= el.user_id %>">삭제</a></td>
+                    <td> <a href="/edit/<% = el.user_id %>">수정</a></td>
+                    <td><%= el.user_id %></td>
+                    <td><%= el.user_pw %></td>
+                    <td><%= el.nubmer %></td>
+                    <td><%= el.series %></td>
+                </tr>
+            <% }); %>
+
+        <% }else{ %>
+        <% } %>
+    </table>
+
+</body>
+
+</html>

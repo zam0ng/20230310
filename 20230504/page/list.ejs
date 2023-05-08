@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>리스트 페이지</h2>
+    <a href="/insert">추가 페이지로 이동</a> <br>
+    <a href="/">메인 페이지로 이동</a>
+
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>번호</th>
+        </tr>
+
+        <% if(data){ %>
+            <% data.forEach((el,index) =>{ %>
+            <tr>
+                <td>삭제</td>
+                <td>수정</td>
+                <td><%= el.id %></td>
+                <td><%= el.user_name %></td>
+                <td><%= el.user_num %></td>
+            </tr>
+            <% }); %>
+        <% }else{ %>
+            <p>데이터가 없습니다.</p>
+
+        <% } %>
+        
+    </table>
+</body>
+<script>
+   
+</script>
+</html>
