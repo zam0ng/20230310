@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/detail.css">
+</head>
+<body>
+        <div class="title-bar">
+
+            <div class="title">movables</div>
+        </div>
+        <a class ="list-move" href="/list">⬅</a>
+        <!-- <label for="">글번호</label>
+        <input type="text" value ="<%= data.id %>">
+        <br> -->
+        <div style="background-color: ivory;">
+            <table>
+                <tr>
+                    <td><img src="<%= data.image %>" alt ="" width="300"/></td>
+                </tr>
+            </table>
+        <div class="main-title">
+            <label for=""></label>
+            <input type="text" value="<%= data.title %>" readonly>
+        </div>
+    
+
+        <div class="main-content">
+            <label for=""></label>
+            <input type="text" value="<%= data.content %>" readonly>
+        </div>
+        <br>
+
+        <div class="main-like">
+            <form action="/detail" method="post" class="detail-form1">
+                <label for=""></label>
+                <button class="like" name ="likey1">👍</button>
+                <input class="likeyCnt" type="text" name="likey" value="<%= data.likey %>">
+            </form>
+        </div>
+
+        <div class="del">
+            <a href="/delete/<%= data.id %>"><button>삭제</button></a>
+            <a href="/edit/<%= data.id %>"><button>수정</button></a>
+        </div>
+    
+    <br>
+
+    <hr>
+    <div class="reply-title">
+        <h4> 댓글 </h4>
+    </div>  
+
+    <div class="reply-main">
+        <form action="/add" method="post" class="add-form1">
+
+            <label for=""></label>
+            <input type="text" placeholder="댓글을 입력하세요" name ="content" style="color:gray" ><button name="submit" >등록</button>
+
+        </form>
+    </div>
+ 
+    <div class="reply-list">
+        <% data2.forEach((el,index) => { %>
+            <div class="reply"><%= el.content %></div>
+        <% }); %>
+    </div>
+</div>  
+</body>
+
+<script>
+
+    let like = document.querySelector(".like");
+    let likeyCnt = document.querySelector(".likeyCnt");
+    like.onclick = ()=>{
+        likeyCnt.value = parseInt(likeyCnt.value) +1;
+    }
+
+    const currentPath = window.location.pathname;
+    const temp=currentPath.split('/')
+    console.log(temp); // "/some-page"와 같은 문자열 출력
+
+    let form1=document.querySelector('.detail-form1');
+    // console.log(form1.action);
+    form1.action=`/detail/${temp[2]}`;
+    console.log(form1.action);
+
+    let form2=document.querySelector('.add-form1');
+    // console.log(form1.action);
+    form2.action=`/add/${temp[2]}`;
+    console.log(form2.action);
+  
+</script>
+</html>

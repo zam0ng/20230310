@@ -36,10 +36,25 @@ const posts ={
         } catch (error) {
             console.log("글 내용 추가되지 않음.");
         }
+    },
+    // 글 내용 보기
+    PostView : async function(id){
+
+        try {
+           const [result] = await mysql.query("select * from board where id =?",[id]);
+           console.log("1");
+           console.log(result[0]);
+           console.log("2");
+           console.log([result]);
+           console.log("3");
+           console.log(result);
+           return [result];
+        } catch (error) {
+            
+        }
     }
 
-    // 
-    
+    //     
 
 };
 
@@ -47,4 +62,4 @@ module.exports = posts;
 
 // posts.viewPost(); // [] 안나옴
 
-// posts.insertPost();
+// posts.insertPost();,

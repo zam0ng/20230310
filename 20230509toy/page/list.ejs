@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="title-name">
+        BUY & SELL
+    </div>
+
+    <div class="board-main">
+        <a href="/insert"><button>글 작성</button></a>
+    <table>
+        <tr>
+            <th class="list-num">글번호</th>
+            <th class="list-title">제목</th>
+            <th class="list-like">좋아요</th>
+        </tr>
+    <% data.forEach((el,index) => { %>
+        <tr>
+            <td><%= el.id %></td>
+            <td> <a href="/detail/<%= el.id %>"> <%= el.title %> </a></td>
+            <td><%= el.likey %></td>
+        </tr>
+    <% }); %>
+    </table>
+    </div>
+
+</body>
+
+<script>
+
+    
+</script>
+</html>

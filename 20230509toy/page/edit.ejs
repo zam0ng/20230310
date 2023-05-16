@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/edit.css">
+</head>
+<body>
+    <div class="title-bar">
+
+        <div class="title">movables</div>
+    </div>
+    <form action="" method="post">
+
+        <!-- <label for="">글번호</label>
+        <input type="text" name="id" value="<%= data.id %>" disabled>
+        <br> -->
+        <div class="title2">
+            <label for="">제목</label>
+        </div>
+        <div class="insert-title"> 
+        <input type="text" name="title" value="<%= data.title %>" >
+        </div>
+        <br>
+        <div class="content2">
+            <label for="">내용</label>
+        </div>
+        <div class ="insert-content">
+        <textarea type="text" name="content"><%= data.content %></textarea>
+        </div>
+        <BR>
+        <div class="btn">
+            <button>수정하기</button>
+        </div>
+    </form>
+</body>
+</html>

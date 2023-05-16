@@ -1,5 +1,7 @@
 const exp = require("constants");
 const {posts} = require("../models");
+const { PostView } = require("../models/posts");
+const { log } = require("console");
 
 exports.ViewPost = async function(req,res){
 
@@ -12,9 +14,21 @@ exports.ViewPost = async function(req,res){
 }
 
 exports.InsertPost = async function(req,res){
-
+    const {title, content} =req.body;
     try {
-        const data = await posts.insertPost();
+        await posts.insertPost(title,content);
+    } catch (error) {
+        
+    }
+}
+
+exports.POSTVIEW = async function(req,res){
+    const {id} = req.params;
+    try {
+       const data =  await posts.PostView(id);
+       console.log("Zz");
+       console.log(data);
+       return data;
     } catch (error) {
         
     }
