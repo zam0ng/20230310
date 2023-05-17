@@ -79,7 +79,6 @@ router.get("/list", verifyLogin, async (req,res)=>{
     try {
          const data =  await Viewboard();
         
-         
         res.render("list", {data});
     } catch (error) {
         

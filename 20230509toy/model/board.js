@@ -44,6 +44,7 @@ const board ={
                 console.log("11");
                 console.log(data);
                 return data[0];
+                
             } catch (error) {
                 console.log("모델 글상세에서 오류남");
             }

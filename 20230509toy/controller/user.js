@@ -60,11 +60,11 @@ exports.Login = async function(req,res){
         if(!data?.user_id){
             return res.send("아이디 없음");
         }
-        console.log("로그인창에 입력한 비밀번호")
-        console.log(user_pwd)
+        // console.log("로그인창에 입력한 비밀번호")
+        // console.log(user_pwd)
 
-        console.log("mysql에서 가져온 비밀번호")
-        console.log(data.user_pwd);
+        // console.log("mysql에서 가져온 비밀번호")
+        // console.log(data.user_pwd);
         const compare_pw = await compare(user_pwd,data.user_pwd);
         console.log(compare_pw);
 
@@ -115,7 +115,7 @@ exports.verifyLogin = async (req,res,next) =>{
             //두번째는 해석된 객체
     jwt.verify(access_token,process.env.ACCESS_TOKEN_KEY,async (err,acc_decoded)=>{
         // 엑세스 토큰이 썩은 토큰이라면
-        if(err){
+            if(err){
 
             // 리프레시 토큰이 썩었는지 확인후에
             jwt.verify(refresh_token,process.env.REFRESH_TOKEN_KEY, async (err,ref_decoded)=>{
@@ -129,7 +129,8 @@ exports.verifyLogin = async (req,res,next) =>{
             else{
                 // 리프레시 토큰안에 있는 유저아이디로 data 조회
                 const data = await user.userSelect(ref_decoded.user_id);
-                console.log(data);
+                console.log("sdfdsfds여기",data.refresh);
+                console.log("여기여기",refresh_token);
                 // 조회한 data 안에 refresh 값과 키값과 같으면 access 토큰 재발행
                 if(data.refresh == refresh_token){
 
@@ -150,14 +151,26 @@ exports.verifyLogin = async (req,res,next) =>{
                 
             }
             })
-        }else{ // 엑세스 토큰이 썩은 토큰이 아니니 유지가 된다.
+        
+        }
+        else{
+             // 엑세스 토큰이 썩은 토큰이 아니니 유지가 된다.
+            jwt.verify(refresh_token,process.env.REFRESH_TOKEN_KEY, async (err,ref_decoded)=>{
+            const data = await user.userSelect(ref_decoded.user_id);
+
+            if(data.refresh !== refresh_token){
+                res.send("중복 로그인 방지");
+            }else{
             console.log("로그인 정상 유지중");
             next();
+            }
+            })
+        
         }
-    })
+})
 }
 
-
+// 중복 로그인 확인은 엑세스  리플래시 둘다 유효할 때
 
 exports.Viewboard = async function(){
 
