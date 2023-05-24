@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1>어드민 페이지</h1>
+   
+    <% data.forEach((el,index) => { %>
+        <ul>
+            <form action="/agree/update/<%= el.id %>" method="post">
+            <li><input type="text" value="<%= el.user_id %>" name ="user_id" readonly></li> 
+            <li><input type="text" value="<%= el.id %>" name ="id" readonly></li>
+                <input class = "inputt" type="text" value="false" name="agree"><button class="btn">수락</button>
+            </form>
+        </ul>
+    <% }); %>
+    
+
+</body>
+
+<script>
+</script>
+</html>

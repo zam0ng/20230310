@@ -31,8 +31,6 @@ app.use("/",router);
 
 const mysql = require("./model/config");
 
-
-
 app.listen(3000,()=>{
     console.log("서버 잘열림");
 })

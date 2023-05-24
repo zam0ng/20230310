@@ -1,5 +1,5 @@
 const express = require("express");
-const { Signup , Login , Viewboard, Insertboard, Selectboard, Likeyboard, Deleteboard, Editboard, Replyinsert,Replyview,verifyLogin} = require("../controller/user");
+const { Signup , Login , Viewboard, Insertboard, Selectboard, Likeyboard, Deleteboard, Editboard, Replyinsert,Replyview,verifyLogin,verifyrefresh,Mypage} = require("../controller/user");
 
 const router = express.Router();
 const path = require("path");
@@ -94,9 +94,14 @@ router.get("/insert",async (req,res)=>{
     }
 })
 
-router.post("/insert",upload.single('userfile'),async (req,res)=>{
+router.post("/insert",upload.single('userfile'), async (req,res)=>{
     // console.log(req);
+    
     try {
+        const data = await verifyrefresh(req,res);
+        // 블로그에 오류정리
+        req.data= data;
+        
         await Insertboard(req,res);
         res.redirect("/list");
     } catch (error) {
@@ -171,4 +176,15 @@ router.post("/edit/:id",async (req,res)=>{
     }
 })
 
+router.get("/mypage",async (req,res)=>{
+    const user_id_data = await verifyrefresh(req,res);
+    console.log(user_id_data);
+    try {
+        const data =  await Mypage();
+       
+       res.render("mypage", {data});
+   } catch (error) {
+       console.log("마이페이지 글 목록 보여주다 라우터에서 오류남"+error)
+   }
+})
 module.exports = router;

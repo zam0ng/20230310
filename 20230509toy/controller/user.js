@@ -170,6 +170,48 @@ exports.verifyLogin = async (req,res,next) =>{
 })
 }
 
+exports.verifyrefresh = async (req,res,next)=>{
+
+    const {refresh_token} =req.session;
+    
+    const a= jwt.verify(refresh_token,process.env.REFRESH_TOKEN_KEY, async(err,decoded)=>{
+
+        if(err){
+            console.log("리프레시 토큰 만료")
+            res.send("다시 로그인하세요")
+        }
+        else{
+        
+            console.log("현재 로그인한 유저는" + decoded.user_id);
+            const data = decoded.user_id;
+            return data;
+        }
+    })
+    return a;
+}
+// 메서드가 반환값을 지원하지 않을 때
+// exports.verifyrefresh = async (req,res,next)=>{
+
+//     const {refresh_token} =req.session;
+    
+//     return new Promise((resolve,rej)=>{
+//     jwt.verify(refresh_token,process.env.REFRESH_TOKEN_KEY, async(err,decoded)=>{
+
+//         if(err){
+//             console.log("리프레시 토큰 만료")
+//             res.send("다시 로그인하세요")
+//         }
+//         else{
+        
+//             console.log("현재 로그인한 유저는" + decoded.user_id);
+//             const data = decoded.user_id;
+//             resolve(data);
+//         }
+//     })
+//     })
+// }
+
+
 // 중복 로그인 확인은 엑세스  리플래시 둘다 유효할 때
 
 exports.Viewboard = async function(){
@@ -184,15 +226,27 @@ exports.Viewboard = async function(){
     }
 }
 
+exports.Mypost = async (req,res)=>{
+
+    try {
+        const data = await board.mypost(user_id);
+        return data;
+    } catch (error) {
+        console.log("마이페이지 목록 가져오는 컨트롤러에서 오류남"+error);
+    }
+
+}
+
 exports.Insertboard = async function(req,res){
 
     const {title,content,likey} = req.body;
+    const writer =req.data;
     
     if(req.file){
         
         const image = ("/upload/"+req.file.filename);
         try {
-            await board.insertboard(title,content,image);
+            await board.insertboard(title,content,image,writer);
         } catch (error) {
             console.log("컨트롤러 게시글 추가에서 오류남")
         }
@@ -201,17 +255,13 @@ exports.Insertboard = async function(req,res){
 
     else{
         try {
-            await board.insertboard(title,content,null);
+            await board.insertboard(title,content,null,writer);
         } catch (error) {
             console.log("컨트롤러 게시글 추가에서 오류남")
         }
 
     }
 
-    // console.log("wer")
-    // console.log(image);
-    
-    
 }
 
 exports.Selectboard = async function(req,res){
@@ -286,4 +336,13 @@ exports.Replyview = async function(req,res){
         console.log("컨트롤러 리플뷰에서 오류남")
     }
 }
+
+// exports.Useridsearch = async (req,res)=>{
+
+//     try {
+        
+//     } catch (error) {
+        
+//     }
+// }
 

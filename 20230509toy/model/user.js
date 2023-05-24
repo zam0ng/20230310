@@ -2,7 +2,7 @@ const mysql = require("./config");
 
 const user ={
 
-    inittable : async function(){
+    inittable : async ()=>{
        
         try {
             const [result] = await mysql.query("select * from user");
@@ -12,21 +12,17 @@ const user ={
         }
     },
 
-    signup : async function(user_id,hash,user_name,user_num){
-        console.log(user_id)
-        console.log(hash);
-        console.log(user_name);
-        console.log(user_num);        
+    signup : async function(user_id,hash,user_name,user_num){    
         
         try {
-            await mysql.query("INSERT INTO user (user_id,user_pwd,user_name,user_num) VALUES(?,?,?,?)",[user_id,hash,user_name,user_num]);
-            console.log("회원가입 완료");
-        } catch (error) {
 
-            
+            await mysql.query("INSERT INTO user (user_id,user_pwd,user_name,user_num) VALUES(?,?,?,?)",[user_id,hash,user_name,user_num]);
+
+        } catch (error) {
             console.log("모델 signup에서 오류"+error);
         }
     },
+ 
     login : async function(user_id,user_pwd){
         
         try {
@@ -55,10 +51,19 @@ const user ={
         } catch (error) {
             console.log("모델 userselect 에서 오류남 "+error);
         }
+    },
+    useridsearch : async (refresh)=>{
+
+        try {
+            await mysql.query("select user_id from user where refresh =?",[refresh]);
+        } catch (error) {
+            console.log("리프레시로 유저아이디 가져오는 모델에서 오류남")
+        }
     }
 }
 
 // user.inittable();
 
-//
+// 아래부터는 블로그 정리하면서 한번 써보는 곳
+
 module.exports = user;

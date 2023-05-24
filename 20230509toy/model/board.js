@@ -9,7 +9,8 @@ const board ={
                 await mysql.query("select * from board");
 
             } catch (error) {
-                await mysql.query("CREATE TABLE board (id INT AUTO_INCREMENT PRIMARY KEY, title varchar(20), content varchar(20), likey varchar(20))");
+                await mysql.query("CREATE TABLE board (id INT AUTO_INCREMENT PRIMARY KEY, title varchar(20), content varchar(20), likey varchar(20), image varchar(200), writer varchar(20))");
+                await mysql.query("ALTER TABLE board add CONSTRAINT fk_user FOREIGN KEY (writer) REFERENCES user (user_id)");
             }
         },
 
@@ -27,11 +28,12 @@ const board ={
         },
 
         // 게시글 추가
-        insertboard : async function(title,content,image){
+        insertboard : async function(title,content,image,writer){
             
             console.log(image);
+            console.log()
             try {
-                await mysql.query("INSERT INTO board (title,content,likey,image) values (?,?,?,?)",[title,content,"0",image])
+                await mysql.query("INSERT INTO board (title,content,likey,image,writer) values (?,?,?,?,?)",[title,content,"0",image,writer])
             } catch (error) {
                 console.log("모델 게시글 추가에서 오류남",error)
             }
@@ -109,7 +111,17 @@ const board ={
         },
         fileupload : async function(){
 
+        },
+
+        mypost : async function(user_id){
+            try {
+                const data = await mysql.query("select id,title,likey,writer from user INNER JOIN board ON user.user_id = board.writer where board.writer =?",[user_id])
+                return data[0];
+            } catch (error) {
+                console.log("마이페이지 글 읽어오기 모델에서 오류남" +error);
+            }
         }
+    
 };
 
 
