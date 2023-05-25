@@ -4,6 +4,6 @@ const {islogin} =require("../controller/logincontroller");
 
 router.get("/",islogin,borderview);
 
-router.post("/",islogin,borderinsert);
+
 
 module.exports = router;

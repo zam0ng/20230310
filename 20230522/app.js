@@ -37,7 +37,7 @@ sequelize.sync({force:false}).then((e)=>{
     console.log(err);
 })
 
-app.use("/signUp",signUpRouters);
+app.use("/signUp",signUpRouters); 
 app.use("/login",loginRouters);
 app.use("/border",borderRouters);
 

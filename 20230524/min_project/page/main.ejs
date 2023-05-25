@@ -39,7 +39,9 @@
 
 <script>
     window.onload = ()=>{
+        //io 연결해주고
         const socket = io.connect();
+        // reserve 라는 이벤트로 보내진 데이터 수신하여 data에 담아
         socket.on('reserve',(data)=>{
             if(data.selectCount == selectBtn.selectedIndex){
                 let target = document.querySelector(`div[data-x="${data.x}"][data-y="${data.y}"]`)
@@ -47,10 +49,12 @@
                 target.classList.add("disable");
             }
         })
+
         let selectCount = 0;
         selectBtn.onchange = function(){
             content.innerHTML = "";
-            //select 태그의 선택한 옵션의 value를 호출한다.
+
+            // this.selectedIndex 라는 옵션은 select 태그의 선택한 옵션의 value를 호출한다.
             selectCount = this.selectedIndex;
             console.log(selectCount);
 
