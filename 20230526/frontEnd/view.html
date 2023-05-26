@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<body>
+    <h1>글 목록 페이지</h1>
+    <a href="http://127.0.0.1:5500/frontEnd/mypage.html">마이페이지</a>
+    <ul id="postsList">
+
+    </a>
+    </ul>
+</body>
+<script>
+    async function view(){
+        try {
+            const {data} = await axios.get("http://127.0.0.1:8090/view/view",{
+
+        // 브라우저가 쿠키를 서버로 전달할 수 있는 옵션
+        withCredentials : true,
+        })
+            console.log("456456");
+            console.log(data);
+
+            
+
+            
+                
+            
+            data.forEach((el) => {
+            postsList.innerHTML += 
+            
+                // console.log(el);
+            `
+
+            <li>
+                <span>글번호 : ${el.id}</span>
+                <a href="http://www.naver.com"><span>글제목 : ${el.title}</span></a>
+                
+            </li>
+            `
+            });
+
+        } catch (error) {
+            
+        }
+    }
+    view();
+</script>
+</html>
