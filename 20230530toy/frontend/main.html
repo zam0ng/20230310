@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<style>
+    img{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+    }
+</style>
+<body>
+    <h1>main</h1>
+    
+    <img src="" alt="" id="imgg">
+    
+    <input type="file" id="file">
+    <button id="imgBtn">전송</button>
+
+</body>
+
+<script>
+    imgBtn.onclick =  () =>{
+
+        
+        const form = new FormData();
+
+        form.append("upload",file.files[0]);
+
+        axios.post("http://127.0.0.1:8090/upload",form,{
+
+            //이것때문에 req 가 안읽힘
+            withCredentials:true,
+
+            "Content-Type" :"multipart/form-data"
+        }).then((e)=>{
+            console.log("잘 전달됨");
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+
+    async function getimg(){
+        try {
+            const {data} = await axios.get("http://127.0.0.1:8090/upload/myimg",{
+                
+                withCredentials: true,
+            })
+            // console.log("111111");
+            console.log(data);
+
+            imgg.src = "http://localhost:8090/qwer/"+data;
+
+        } catch (error) {
+            console.log("getimg 에서 오류"+error);
+        }
+    }
+    getimg();
+    
+
+</script>
+</html>

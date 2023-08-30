@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .imgTitle{
+
+            width: 100%;
+        }
+        .imgTitle h1{
+
+            width: 210px;
+            margin: 0 auto;
+            /* border: 1px solid black; */
+            text-align: center;
+            color: cornflowerblue
+        }
+        .imgList{
+
+            display: flex;
+            width: 100%;
+            height: 250px;
+            /* border: 1px solid black; */
+        }
+        .imgMain{
+
+            width: 25%;
+            height: 250px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .imgMain img{
+            
+            width: 95%;
+            height: 95%;
+            object-fit: cover;
+
+        }
+        .modalMain{
+            display: none;  
+            position: absolute;
+            top :0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.596);
+
+        }
+        .modalMain.isactive{
+            display: block;
+            z-index: 1;
+        }
+        .modalMain div{
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            border: 1px solid black;
+        }
+        .imgBox{
+            width: 100%;
+            height: 95vh;
+            border: 1px solid black;
+
+            position: relative;
+        }
+        .imgContain{
+            position: absolute;
+        }
+        #modalImg{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 95%;
+            height: 95%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="imgBox">
+
+        <div class="modalMain">
+            <div>
+                <img id="modalImg" src="" alt="">
+            </div>
+            <button class="closeBtn">닫기</button>
+        </div>
+
+        <div class="imgContain">
+            <div class="imgTitle">
+                <h1>이미지 갤러리</h1>
+            </div>
+
+            <div class="imgList">
+                <div class="imgMain"><img class="aa" src="./img/1.jpg" alt=""></div>
+                <div class="imgMain"><img class="aa" src="./img/2.jpg" alt=""></div>
+                <div class="imgMain"><img class="aa" src="./img/3.jpg" alt=""></div>
+                <div class="imgMain"><img class="aa" src="./img/4.jpg" alt=""></div>
+            </div>
+        </div>
+
+        
+    </div>
+</body>
+<script>
+    let a = document.querySelectorAll(".aa");
+    let modalMain = document.querySelector(".modalMain");
+    let btn = document.querySelector(".closeBtn")
+    console.log(a);
+
+   
+
+    a.forEach((el)=>{
+        console.log(el.src);
+        el.onclick = ()=>{
+            console.log("눌림>?")
+            modalImg.src =el.src;
+            modalMain.classList.toggle("isactive")
+        }
+    })
+
+    btn.onclick = () =>{
+        modalMain.classList.toggle("isactive")
+    }
+
+
+</script>
+</html>

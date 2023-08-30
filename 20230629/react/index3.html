@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또번호 추첨기 리액트</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+</head>
+<style>
+    .ta{
+        display: flex;
+        width: 220px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        
+    }
+    .tb,.tc{
+        width: 22px;
+        text-align:  center;
+        border: 1px solid orange;
+        background-color: rgba(255, 166, 0, 0.308);
+        
+    }
+    .tc{
+        border-radius: 50%;
+    }
+    
+</style>
+<body>
+    <div id="root"></div>
+    
+</body>
+<script type="text/babel">
+// 1~45 랜덤숫자를 생성하는 컴포넌트
+// 버튼을 눌렀을 때 숫자하나를 뽑는 컴포넌트
+// 뽑힌 숫자가 또 뽑혔는지 식별하는 컴포넌트
+
+    // 숫자를 담을 박스
+    class Numbox extends React.Component{
+        // constructor(p){
+        //     super(p)
+        // }
+
+        render(){
+            return (
+            
+                <div className="tb">
+                    <span>{this.props.num}</span>
+                </div>
+            
+            )
+        }
+    }
+
+    class Numbox2 extends React.Component{
+        // constructor(p){
+        //     super(p)
+        // }
+
+        render(){
+            return (
+            
+                <div className="tc">
+                    <span>{this.props.num2}</span>
+                </div>
+            )
+            this.setState({isActive : false});
+
+        }
+    }
+    
+    class Numlist extends React.Component{
+        constructor(p){
+            super(p)
+            this.state = {
+                rottonum : new Array(6).fill(null)
+            }
+        }
+        componentDidMount(){
+            this.randomnum()
+        }
+
+        randomnum() {
+            console.log(this.state.rottonum)
+            const newArr = [];
+            while (newArr.length < this.state.rottonum.length) {
+                let num = Math.floor(Math.random() * 45) + 1;
+                if (!newArr.includes(num)) {
+                    newArr.push(num);
+                }
+            }
+            this.setState({rottonum : newArr});
+        }
+
+        render(){
+            return <>
+              {this.state.rottonum.map((e,index)=><Numbox2 key={index} num2={e}></Numbox2>)}
+            </>
+        }
+    }
+    class SelectBtn extends React.Component{
+        // constructor(p){
+        //     super(p)
+
+        // }
+        handleClick(){
+            
+        }
+
+        render(){
+            return(
+                <button onClick={this.props.SelectBtnHandler}>추첨</button>
+            )
+        }
+    }
+
+    class Allnum extends React.Component{
+        constructor(p){
+            super(p)
+            this.state = {
+                allnum : new Array(45).fill(null),
+                isActive : false
+            }
+        }
+
+        componentDidMount(){
+            this.allnumber()
+        }
+
+        allnumber() {
+            const all = [];
+            for (let index = 1; index < 46; index++) {
+                all.push(index);
+            }
+
+            this.setState({...this.state,allnum : all});
+        }
+
+        SelectBtnHandler = () => {
+            this.setState({...this.state,isActive : true});
+        }
+
+        render(){
+            return(
+                <>
+                {this.state.allnum.map((e,index)=><Numbox key={index} num={e}></Numbox>)}
+                <SelectBtn SelectBtnHandler={this.SelectBtnHandler}/>
+                {this.state.isActive ? <Numlist/> : false}
+                </>
+            )
+            
+        }
+    }
+   
+    class App extends React.Component{
+        render(){
+            return(
+                <div className="ta">
+                    <Allnum/>    
+                </div>
+            )
+        }
+    }
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+    root.render(<App/>);
+</script>
+</html>

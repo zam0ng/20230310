@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function base10ToString(num){
+        let n,m,a,b="" ;
+        let ta;        
+     
+            base10ToStringHelper(num);
+
+            return ta;
+
+        function base10ToStringHelper(num){
+            
+            
+            n = parseInt(num / 2) ;
+            m = num % 2 ;
+
+            a = m.toString();
+            b = a + b;
+
+            if(n>1)
+            base10ToStringHelper(n);
+
+            else{
+                ta=("1"+b);
+                return ta
+            }
+            
+        }   
+    }
+    
+    console.log(base10ToString(100)) // 1100100
+
+
+</script>
+</html>

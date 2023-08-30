@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <!-- react, reactDOM 라이브러리 -->
+
+    <!-- Babel을 가져와서 JSX문법을 사용 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+</body>
+
+<script type="text/babel">
+    class TA extends React.Component {
+
+        constructor(a){
+            super(a);
+            this.state = {items : ["아이템1","아이템2"]};
+        }
+
+        render(){
+            const {items} =this.state;
+            return(
+                <>
+                    <ul>
+                        {items.map((item)=><li>{item}</li>)}
+                    </ul>
+                    <button onClick ={()=>{
+                        this.setState({items : [...items,`아이템 ${items.length +1}`]})
+                    }}>추가</button>
+                
+                </>
+            )
+        }
+    }
+
+    const roots = ReactDOM.createRoot(root);
+    roots.render(<TA />);
+
+</script>
+</html>

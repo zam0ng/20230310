@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let tt;
+
+    function isPalindromeRecursive(word){
+        let ta;
+        let tb="";
+        let tc="";
+        if(word.length!=0){
+            isPalindromeRecursiveHelper(word, tb,tc)
+        }
+        return tt;
+    }
+    function isPalindromeRecursiveHelper(word,beginPos,endPos){
+        ta= word.length;
+
+         // 문자열 첫글자 tb, 마지막글자 tc
+        beginPos = word.substr(0,1);
+        endPos = word.slice(ta-1,ta);
+
+        if(beginPos ==endPos){
+            word =word.slice(1,ta-1);
+            
+            if(word=="" || word.length==1){
+                tt = true
+                return tt;
+            }
+            isPalindromeRecursive(word);
+        }
+        else{
+            tt= false;
+            return tt
+        }
+    }
+
+    console.log(isPalindromeRecursive("abccba"))
+    console.log(isPalindromeRecursive("abbc"))
+    console.log(isPalindromeRecursive("appleelppa"))
+    console.log(isPalindromeRecursive("appleelpaa"))
+    console.log(isPalindromeRecursive("racecar"))
+
+
+</script>
+</html>

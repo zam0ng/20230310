@@ -1,0 +1,31 @@
+🚩react 설치!!
+
+-> npx create-react-app [폴더명]
+
+🚩react router 설치!!
+
+-> npm install react-router-dom@6
+
+🚩redux 설치 !!
+
+-> npm install redux
+
+🚩react 에서 redux를 쓸 수 있게 도와주는
+
+-> npm install react-redux
+
+🚩전역 상태를 개발하면서 브라우저의 개발자 모드로 전역상태가 바뀌는걸 실시간으로 확인하고싶음
+ 
+-> npm install redux-devtools-extension
+
+🚩리액트 css 설치
+
+-> npm i styled-components
+
+🚩dispatch 비동기처리 
+
+-> npm i redux-thunk
+
+🚩빌드하기
+
+-> npm run build

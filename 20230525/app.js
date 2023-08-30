@@ -105,7 +105,7 @@ io.on("connection",(socket)=>{
 
         console.log("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
         console.log(room1);
-        id
+        
         for (let index = 0; index < room1.length; index++) {
             
             if(id==room1[index].name){

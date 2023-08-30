@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    // 소인수분해하여 소인수 구하기
+
+    function primeFactor(n){
+        let arr=[];
+        let ta;
+        let tb;
+        if(n>1){
+            for (let i = 1; i <= n; i++) {
+                
+                if(n%i==0){
+                    arr.push(i);
+                }
+            }
+           ta = arr.slice(1,arr.length-1);
+           tb = ta.join();
+            return tb;
+        }
+        
+    }
+
+    console.log(primeFactor(10)) ;  // 2,5
+
+
+</script>
+</html>
