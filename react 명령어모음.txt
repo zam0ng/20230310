@@ -29,3 +29,5 @@
 🚩빌드하기
 
 -> npm run build
+
+https://us02web.zoom.us/j/2772873650
