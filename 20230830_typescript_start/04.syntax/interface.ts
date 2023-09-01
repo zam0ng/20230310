@@ -18,7 +18,6 @@ const Block : IBlock = {
     data : 123,
     like :123,
     hit : 123,
-
 }
 
 const Block2 : IBlock = {
@@ -31,16 +30,17 @@ const Block2 : IBlock = {
 
 
 // implements 키워드는 class에 구조가 만족하는지 여부 체크
-// interface IProduct {
-//     name : string
-//     price? : number
+interface IProductt {
+    name : string
+    price? : number
 
-// }
-// class product implements IProduct {
-//     name : string
-//     price : number
-//     constructor(name: string, price : number){
-//         this.name = name;
-//         this.price = price;
-//     }
-// }
+}
+
+class producttt implements IProductt {
+    name : string
+    price : number
+    constructor(name: string, price : number){
+        this.name = name;
+        this.price = price;
+    }
+}
