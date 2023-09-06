@@ -37,6 +37,7 @@ class Block extends BlockHeader implements IBlock{
 
         // 마이닝을 통해서 블록의 생성 권한을 받은 블록을 받고 만들고
         const newBlock = Block.findBlock(generateBlock);
+        console.log("newBlock------------------",newBlock)
         return newBlock;
     }
     
@@ -71,9 +72,9 @@ class Block extends BlockHeader implements IBlock{
             // 블록을 생성할 수 있다.
             
             // 충족되었는지 확인하려면 binary 2진 값이 바뀌는 이유는
-            console.log("hash : ",hash);
+            // console.log("hash : ",hash);
             const binary : string = CryptoModule.hashToBinary(hash);
-            console.log("binary : ",binary);
+            // console.log("binary : ",binary);
             // 연산의 값이 난이도에 충족했는지 체크할 변수
             // startsWith : 문자열의 시작이 매개변수로 전달된 문자열로 시작하는지 체크
             // "000" = 이문자열로 시작하는지 결과가 true false 반환되고
@@ -89,6 +90,12 @@ class Block extends BlockHeader implements IBlock{
             }
         }
     }
+    // 추가할 블록을 찾으면 네트워크에 브로드 캐스트를 하고
+    // 다른 네트워크들은 내 체인과 블록을 받는다.
+    // 그리고 블록 검증과 체인검증을 하는데, 다른 네트워크의 체인과 내 체인을 비교해서 긴체인이 정답.
+    // 다른 네트워크의 체인이 더 길 경우에는 내가 채굴이 더 늦은것 . (보상x)
+    // 다른 네트워크의 체인보다 길어지면 내가 채굴을 더 빠르게 한것. (보상o)
+
     // 블록의 해시를 구하는 함수
     static createBlockHash(_block: Block) : string{
         //
