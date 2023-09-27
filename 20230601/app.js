@@ -135,7 +135,7 @@
 // sudo snap install --classic certbot
  
 // certbot 실행파일에 링크 설정
-// sudo ln -s /snap/bin/certbot /usr/bin/certbot
+// sudo ln -s /snap/bin/certbot/usr/bin/certbot
 
 // nginx 관련 certbot 실행
 // sudo certbot --nginx

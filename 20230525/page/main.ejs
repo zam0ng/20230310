@@ -112,9 +112,7 @@
             <select name="" id="rooms">
                 <option value="0번방">0번방</option>
                 <option value="1번방">1번방</option>
-
             </select>
-
             
             <div id="send">
                 <input type="text" id="msg">
@@ -122,7 +120,7 @@
             </div>
             <div id ="send2">
                 <input type="text" id="msg2">
-                <button id="sendBtn2">귓속말</button>
+                <button id="whisperBtn">귓속말</button>
             </div>
             <ul id="messages">
     
@@ -144,17 +142,12 @@
 <script>
     window.onload = ()=>{
         loginBtn.onclick = ()=>{
+
             login.style.display = "none";
             main.style.display = "block";
 
             const name = username.value;
-            console.log(rooms);
-            console.log(rooms.options);
-            console.log(rooms.options.selectedIndex);
-            console.log(rooms.selectedIndex);
             let room = rooms.options[rooms.selectedIndex].value;
-            console.log(room);
-
             const socket = io.connect();
 
             socket.emit("list",room,name);
@@ -163,9 +156,6 @@
             rooms.onchange = function(e){
                 //이벤트가 일어난 태그
                 let el = e.target;
-                
-                console.log(el.options);
-                console.log(el.selectedIndex);
                 // 해당 유저가 room에서 떠남
                 console.log(room); // 현재방
                 socket.emit("leaveRoom",room,name);
@@ -173,64 +163,26 @@
                 room = rooms.options[el.selectedIndex].value;
                 console.log(room); // 바꾼방
 
-                //방 바꿨을 떄
-                // 바뀐 방번호와 이름을 보냄
-                // if(el.selectedIndex==1){
-                //     socket.emit("list2",room,name);
-                // }
-                // else{
-                    // console.log("여기들어옴")
-                    // socket.emit("list",room,name);
-                // }
-                
                 socket.emit("joinRoom",room,name);
             }
 
             socket.on("list",(room,room1)=>{
                 
                 list.innerHTML ="";
-                console.log(room1);
-
-                room1.forEach((el)=>{
-                    console.log(el);
-                })
-                
                 for (let i = 0; i < room1.length; i++) {
-                    
                     list.innerHTML +=
                     `<button class="bbtn">${room1[i].name}</button><br>`;
                 }
 
                  let bbtn = document.querySelectorAll(".bbtn");
-                 console.log(bbtn);
-
                  bbtn.forEach((el,index)=>{
 
                     el.onclick = ()=>{
-                        console.log("클릭됨");
-                        console.log(index);
-                        msg2.value =room1[index].name;
+                        msg2.value = room1[index].name;
                     }
                  })
        
             })
-
-            // socket.on("list2",(room,room2)=>{
-                
-            //     list.innerHTML ="";
-            //     console.log(room2);
-
-            //     room2.forEach((el)=>{
-            //         console.log(el);
-            //     })
-                
-            //     for (let i = 0; i < room2.length; i++) {
-                    
-            //         list.innerHTML +=`${room2[i]}<br>`;
-            //     }
-       
-            // })
-            
 
             socket.on("joinRoom",(room,name)=>{
                 messages.innerHTML += `
@@ -252,25 +204,19 @@
 
             socket.on("chat",(name,msg)=>{
 
-                const lii = document.createElement("li");
-                const textt = `${name} : ${msg}`;
-                lii.append(textt);
-                messages.appendChild(lii);
-                // messages.innerHTML += `
-                
-                //     <li>
-                    // ${name} : ${msg}
-                //     </li>
-                // `;
+                const chatlist = document.createElement("li");
+                const chatcontent = `${name} : ${msg}`;
+                chatlist.append(chatcontent);
+                messages.appendChild(chatlist);
+           
             })
 
             sendBtn.onclick= ()=>{
-            console.log("눌림");
                 socket.emit("chat",room,name,msg.value);
                 msg.value ="";
             }
             
-            sendBtn2.onclick =()=>{
+            whisperBtn.onclick =()=>{
                 socket.emit("chat2",msg2.value,name,msg.value);
                 msg.value = "";
             }

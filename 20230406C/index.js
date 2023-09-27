@@ -132,3 +132,7 @@ for(const [key,value] of iter){
 map.forEach(function(value,key){
     console.log(`키는 ${key}, 값은 ${value}`);
 })
+
+let str = "imgs/userImg/user5_2.png"
+let ta = str.substring(13);
+console.log(ta);

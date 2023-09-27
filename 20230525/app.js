@@ -17,16 +17,14 @@ app.set("view engine","ejs");
 
 const server = app.listen(8070,()=>{
     console.log("server on");
-})
+})  
 
 app.get('/',(req,res)=>{
     res.render("main");
 })
 
 let userId=[];
-
 let room1=[];
-let room2=[];
 
 const io = socketio(server);
 
@@ -51,49 +49,29 @@ io.on("connection",(socket)=>{
     })
     
     // 유저 접속시 배열에 유저의 아이디 추가
-    console.log("유저접속");
-    console.log(socket.id);
 
     userId.push(socket.id);
-    console.log(userId);
 
-    const aa = socket.id;
-    console.log(aa);
+    const socketId = socket.id;
+
     // 방번호랑 , 로그인할 때 이름을 받고
     socket.on("list",(room,name)=>{
-
-        room1.push({name,aa,room});
-        console.log("werwer");
-        console.log(room1);
+        
+        room1.push({name,socketId,room});
         socket.join(room);
         // 그 룸에 다가 그사람 이름 표시해야하는데
-        io.to(room).emit("list",room,room1);
+        // io.to(room).emit("list",room,room1);
+        io.emit("list",room,room1);
     })
-
-    // socket.on("list2",(room,name)=>{
-
-    //     room2.push(name);
-    //     console.log("cvxncxvnxcvn");
-    //     console.log(room2);
-    //     socket.join(room);
-    //     // 그 룸에 다가 그사람 이름 표시해야하는데
-    //     io.to(room).emit("list2",room,room2);
-    // })
 
     socket.on("disconnect",()=>{
         
-
-        console.log("유저나감");
-      
         userId = userId.filter((value)=> {
             
             return value!=socket.id
         });
        
-        room1 = room1.filter((value)=> value.aa!=socket.id)
-        
-        console.log(room1);
-        console.log("zzzzzzz")
+        room1 = room1.filter((value)=> value.socketId!=socket.id)
         
         io.emit("list","",room1);
     })
@@ -101,18 +79,15 @@ io.on("connection",(socket)=>{
     socket.on("chat",(room,name,msg)=>{
         io.to(room).emit("chat",name,msg);
     })
+
     socket.on("chat2",(id,name,msg)=>{
 
-        console.log("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
-        console.log(room1);
-        
         for (let index = 0; index < room1.length; index++) {
             
             if(id==room1[index].name){
 
-                id=room1[index].aa;
+                id=room1[index].socketId;
             }
-           
         }
         io.to(id).emit("chat",name,"귓속말"+msg);
     })
