@@ -169,7 +169,7 @@
 // sudo apt-get install -y nodejs
 // 설치 후
 // node -v,npm -v 로 버전 확인
-
+// 🚩 블로그 여기까지 정리함
 // 15. 버전 확인 후 backend package.json 파일있는곳으로 이동후 npm i로 모듈 설치
 // vi.env 로 .env에 적혀있는 정보와 mysql 정보와 일치하는지 확인 / npm start로 실행했을 때 연결 성공 뜨고 워크벤치에서 테이블 생성되면 연결 성공.
 
