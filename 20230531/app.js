@@ -170,6 +170,8 @@
 // 설치 후
 // node -v,npm -v 로 버전 확인
 // 🚩 블로그 여기까지 정리함
+
+
 // 15. 버전 확인 후 backend package.json 파일있는곳으로 이동후 npm i로 모듈 설치
 // vi.env 로 .env에 적혀있는 정보와 mysql 정보와 일치하는지 확인 / npm start로 실행했을 때 연결 성공 뜨고 워크벤치에서 테이블 생성되면 연결 성공.
 
@@ -193,7 +195,7 @@
 // 18. 백그라운드에서 서버를 대기시켜서 계속 동작하게 하는법
 // pm2 설치 : npm i pm2 설치 후 package.json 부분에서 start 부분을 node app.js 가 아닌 pm2 start app.js로 수정하면 된다.
 
-// 19. npm start로 서버를 열면 백그라운드에서 서버를 열게된다.
+// 19. npm start로 서버를 열면 백그라운드에서 서버를 열게된다 .
 
 // // 서버 종료는 npx pm2 kill : 종료
 // // 리스트 확인 npx pm2 list : 리스트

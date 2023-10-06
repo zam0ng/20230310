@@ -82,7 +82,7 @@
 // 원래 경로로 돌아오기 cd /home/ubuntu
 
 // nginx 재실행
-// sudo service nginx restart
+// sudo service nginx restart :
 
 // 탄력적 ip 주소를 도메인으로 교체하자.
 // 가비아에서 도메인을 구입해서 사용할 예정
