@@ -131,19 +131,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "findIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "getPoketmon",
 				"outputs": [
 					{
@@ -237,9 +224,9 @@
 						"type": "address"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "obj",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"name": "sendPoketmon",
@@ -407,11 +394,11 @@
 			]
 		},
 		"contracts/Poketmon.sol": {
-			"keccak256": "0xf6e8fade705a4f9f832165cbcf3a7f8c1180300e1b213bf17db170521a0b7808",
+			"keccak256": "0xd468cc6c8ddc517f1f815a5616592f2546dcba92e3c72f0df33175fc5bc469aa",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://df3023e3a6d1d73272854b26c5903d63dc90d4bf1b4fbdd79c8458161257f652",
-				"dweb:/ipfs/QmYJYAzao7qeC87k4xQvdxMQdt8H796uoRJWLHQXJveYyv"
+				"bzz-raw://bf117b6bf178654960484860fa3f700cf33141d985b5f07210448a8ebb623c8d",
+				"dweb:/ipfs/QmTvJXhctdE8iD1dkng5UEofrxDsL3TEVMc47pcch8KvHV"
 			]
 		}
 	},

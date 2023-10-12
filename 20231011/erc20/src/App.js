@@ -20,7 +20,7 @@ const App =()=>{
   useEffect(()=>{
     if(web3 !== null){
       if(contract) return;
-      const poketmon = new web3.eth.Contract(abi,"0x076b8CeF7b864B9829E8d917997363657E2cf8aF",{data:""});
+      const poketmon = new web3.eth.Contract(abi,"0x36A5F8095D3968884ac1B54C535e609EC5a32E1d",{data:""});
       setContract(poketmon);
     }
   },[web3]);
@@ -95,11 +95,8 @@ const App =()=>{
   //⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ 
   // 3. 포켓몬 거래(포켓몬 소유권 넘길수 있는 함수 만들기)
   const selectPoketmon = async(number)=>{
-    console.log("111",mypoketmon[number-1].name);
-    setArr(mypoketmon[number-1].name);
+    setArr(number);
     setselectNum(number);
-
-    
   }
   
 
@@ -119,13 +116,18 @@ const App =()=>{
   const sendBtn =async()=>{
     console.log(send);
 
-    await contract.methods.sendPoketmon(send,arr).send({
+    const data = await contract.methods.sendPoketmon(send,arr).send({
       from : user.account,
     })
+    getAccounts();
+    havePoketmon();
+    myPoketmonFn();
+    console.log(data);
   }
   const ta =async()=>{
     const result = await contract.methods.test().call();
-    setTesta(result);
+    console.log("ewqrjwoqejroi",result);
+    setTesta(web3.utils.toBigInt(result).toString(10));
   }
   useEffect(()=>{
     if(!contract) return;
@@ -183,7 +185,7 @@ const App =()=>{
           <div>
             {mypoketmon.map((el, index) => (
               <>
-                <span key={index + 1} onClick={() => {selectPoketmon(index + 1)}} style={{ border: ` ${selectNum === index + 1 ? "3px solid red" : "1px solid gray"}` }}>
+                <span key={index} onClick={() => {selectPoketmon(index)}} style={{ border: ` ${selectNum === index ? "3px solid red" : "1px solid gray"}` }}>
                   {el.name} : <img width={50} src={el.url}></img>
                 </span><span>,</span>
               </>

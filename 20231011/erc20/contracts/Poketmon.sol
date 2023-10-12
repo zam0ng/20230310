@@ -10,7 +10,7 @@ contract Poketmon is ERC20 {
     // 포켓몬 객체를 만들것.
     // 이 객체 하나가 포켓몬의 데이터
     address sendperson;
-    string object;
+    uint256 object;
     uint256 idx;
 
     struct Pokets{
@@ -54,23 +54,47 @@ contract Poketmon is ERC20 {
         return poketmons[msg.sender];
     }
 
-    function sendPoketmon(address to, string memory obj) public {
+    function sendPoketmon(address to, uint256 obj) public {
         sendperson = to;
-        object = obj;
-        idx = findIndex();
+        idx = obj;
+        // idx = findIndex();
+        // emit sendPoket(to,obj);
         
-    }
-
-    function findIndex() public view returns(uint256){
-
-        for (uint256 index = 0; index < poketmonName.length; index++) {
+        for (uint256 j = 0; j < poketmonName.length; j++) {
             
-            if(keccak256(bytes(poketmonName[index])) == keccak256(bytes(object))){
-                return idx;
+            if( keccak256(abi.encodePacked(poketmons[msg.sender][idx].name)) == keccak256(abi.encodePacked(poketmonName[j]))){
+
+                poketmons[sendperson].push(Pokets(poketmonUrl[j],poketmonName[j]));
             }
+        }   
+
+        for (uint256 index = idx; index < poketmons[msg.sender].length-1; index++) {
+            
+            poketmons[msg.sender][index] = poketmons[msg.sender][index+1];
         }
 
+        poketmons[msg.sender].pop();
+
+        
     }
+    // event sendPoket (address to, string obj);
+    //⭐⭐⭐
+    // function findIndex() public returns(uint256){
+
+    //     for (uint256 index = 0; index < poketmonName.length; index++) {
+            
+    //         if(keccak256(abi.encodePacked(poketmonName[index])) == keccak256(abi.encodePacked(object))){
+    //             idx = index;
+    //             return idx;
+    //         }
+    //         else{
+    //             idx = 100;
+    //             return 100;
+    //         }
+    //     }
+    //     return 999;
+    // }
+
     function test() public view returns(uint256){
         return idx;
     }
