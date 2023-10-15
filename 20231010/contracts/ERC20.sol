@@ -25,6 +25,10 @@ contract ERC20 is IERC20 {
     // 이미 선언이 되어있는 함수를 interface 함수는 virtual 함수로 되어있는데
     // 기본 선언하면 virtual 함수임
     // override 상속 받은 함수를 새로 정의해서 사용(덮어쓰기)
+
+    //⭐⭐⭐
+    // IERC20.sol 에선 totalSupply 가 function totalSupply() external view returns(uint); 함수로 정의되었다.
+    // sol에서는 단순히 조회하는 함수 경우 데이터 타입만 맞춰주면 변수식으로 선언할 수 있다.(함수이면서 변수)
     uint public override totalSupply;
 
     // 컨트렉트 배포자 현재 버전엔 상속받아서 사용중 필요가 없기때문에 없앤것.(이 컨트렉트 작성할 필요가 없어졌다는 뜻)
@@ -99,12 +103,14 @@ contract ERC20 is IERC20 {
 
         // 소유권을 추가
         allowance[msg.sender][spender] = amount;
+
         emit Approval(msg.sender, spender, amount);
 
         // 성공은 true가 반환되는 함수
         // 실패는 false
         return true;
     }
+
 
     // 권한을 가지고 있는 제3자가 토큰을 보낼 때 사용하는 함수
     function transferFrom(address spender, address to, uint amount) external override returns(bool){

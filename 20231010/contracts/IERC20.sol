@@ -10,7 +10,16 @@ pragma solidity ^0.8.19;
 interface IERC20 {
     // public과 다른 점 external은 외부에서 접근이 가능한 접근 제한자
     // external은 외부의 EOA 또는 CA에서 호출이 가능(즉 외부에서 호출 가능)
-    // 내부에서 접근 x
+    // 내부에서 접근 x -> 스마트 계약 내부에서 호출이 안됨.
+    // ⭐⭐⭐
+    // contract MyContract {
+    //     function externalFunction(uint newValue) external {
+    //         // external 함수를 스마트 계약 내부에서 호출하려는 시도
+    //         externalFunction(newValue);  // 컴파일 오류
+    //     }
+    // }
+    // ⭐⭐⭐
+
     // public은 내부 외부 접근 다 가능.
 
     // public 보다 gas fee가 저렴하다.
