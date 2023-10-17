@@ -282,11 +282,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_tokenId",
-						"type": "uint256"
-					},
-					{
 						"internalType": "string",
 						"name": "tokenURI",
 						"type": "string"
@@ -376,6 +371,29 @@
 					}
 				],
 				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "setAppAll",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -618,11 +636,11 @@
 	},
 	"sources": {
 		"myNFT.sol": {
-			"keccak256": "0xe1314ae866a4d19e7847b1540408189a55c80770998a936cd9e90d0defae3b96",
+			"keccak256": "0x49c91bedaddc71b6cf4e61e3318eb402f168b9d84aac152d355f6e5e2acb0814",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c87a745b19da22fa4e99fb879846284c6e04d74140023d10e842c9cab2d923b6",
-				"dweb:/ipfs/QmQKVNRsV53H5VjBPSf7sa6cC73hP278DjaMsdGyFBNhcH"
+				"bzz-raw://042165ea2b7ec888a8235aa0d4249230de641ee490be98dd157bb3ec4a4bc722",
+				"dweb:/ipfs/QmQemFbBhZ75uevifDWjAauTUZcLas6qjGi6YyoK9wHvp7"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {

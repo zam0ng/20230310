@@ -10,20 +10,19 @@ router.post('/',nftimg.single("upload"),async(req,res)=>{
     // const imgurl = req.file.path;
     // console.log(req.file.path);
 
-    let nftjson = 
-    
+    let nftjson =
     {
         "pinataContent": {
-            name : name,
-            description : explain,
-            image : hash,
-            attributes : [
+            name: name,
+            description: explain,
+            image: hash,
+            attributes: [
             ]
         },
         "pinataMetadata": {
-          "name": `${name}.json`
+            "name": `${name}.json`
         }
-      }
+    }
     const savepath = path.join(__dirname,"..","/NFTjson","test2.json")
     fs.writeFile(savepath,JSON.stringify(nftjson),(err)=>{
 
@@ -53,8 +52,8 @@ router.post('/',nftimg.single("upload"),async(req,res)=>{
             const resp = await axios.post("https://api.pinata.cloud/pinning/pinJSONToIPFS", readJson, {
                 headers: {
                     "Content-Type": "application/json",
-                    pinata_api_key: process.env.PINATA_API_KEY ,
-                    pinata_secret_api_key: process.env.PINATA_SECRET_API_KEY,
+                    pinata_api_key: process.env.REACT_APP_PINATA_API_KEY ,
+                    pinata_secret_api_key: process.env.REACT_APP_PINATA_SECRET_API_KEY,
                 },
 
             });

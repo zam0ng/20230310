@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import useWeb3 from "./hooks/web3.hook";
 import abi from "./abi/MyNft.json";
+const ta = process.env.REACT_APP_PINATA_API_KEY;
 
 const App = () =>{
   const [file,setFile] = useState(null);
@@ -11,11 +12,9 @@ const App = () =>{
   const [hash, setHash] = useState(null);
   const [jsonhash,setJsonhash] =useState(null);
   const [tokenId,setTokenId] =useState(null);
-
-  // ⭐
   const {user, web3}= useWeb3();
   const [contract, setContract]= useState(null);
-
+  console.log(ta);
   useEffect(()=>{
     if(web3 !== null){
       if(contract) return;
@@ -27,7 +26,7 @@ const App = () =>{
   },[web3]);
 
   const mintingBtn = async() =>{
-    const data = await contract.methods.minting(tokenId,jsonhash).send({
+    const data = await contract.methods.minting(jsonhash).send({
       from : user.account,
       gas : 200000,
     })
